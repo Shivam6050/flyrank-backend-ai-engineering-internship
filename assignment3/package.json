@@ -1,0 +1,28 @@
+{
+  "name": "assignment3",
+  "version": "1.0.0",
+  "description": "CRUD api",
+  "keywords": [],
+  "homepage": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/tree/main#readme",
+  "bugs": {
+    "url": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship.git#main"
+  },
+  "license": "ISC",
+  "author": "Shivam Sagar",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.2",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

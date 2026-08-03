@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Task API",
+    "version": "2.0.0",
+    "description": "A CRUD API for managing a to-do list, backed by a SQLite database (tasks.db). Same endpoints and behavior as v1 — only the storage layer changed."
+  },
+  "servers": [{ "url": "http://localhost:3000" }],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "API description",
+        "responses": { "200": { "description": "Basic info about the API" } }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": { "200": { "description": "Server is alive" } }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "summary": "List tasks (read from SQLite)",
+        "parameters": [
+          { "name": "done", "in": "query", "schema": { "type": "boolean" }, "description": "Filter by completion status" },
+          { "name": "search", "in": "query", "schema": { "type": "string" }, "description": "Filter by title containing text (SQL LIKE)" },
+          { "name": "sort", "in": "query", "schema": { "type": "string", "enum": ["id", "title"] }, "description": "Sort order" },
+          { "name": "limit", "in": "query", "schema": { "type": "integer" }, "description": "Max number of results" },
+          { "name": "offset", "in": "query", "schema": { "type": "integer" }, "description": "Number of results to skip" }
+        ],
+        "responses": { "200": { "description": "Array of tasks" } }
+      },
+      "post": {
+        "summary": "Create a new task (INSERT INTO tasks)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "title": { "type": "string" } },
+                "required": ["title"]
+              },
+              "example": { "title": "Buy milk" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Task created" },
+          "400": { "description": "Missing or empty title" }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "summary": "Get a single task (SELECT ... WHERE id = ?)",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "The task" },
+          "404": { "description": "Task not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a task (UPDATE ... WHERE id = ?)",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "done": { "type": "boolean" }
+                }
+              },
+              "example": { "title": "Buy oat milk", "done": true }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Updated task" },
+          "400": { "description": "Invalid body" },
+          "404": { "description": "Task not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a task (DELETE ... WHERE id = ?)",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "204": { "description": "Task deleted" },
+          "404": { "description": "Task not found" }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "summary": "Task statistics (SQL COUNT/SUM)",
+        "responses": { "200": { "description": "Counts of total/done/open tasks" } }
+      }
+    },
+    "/reset": {
+      "post": {
+        "summary": "Clear the table and re-seed the 3 example tasks",
+        "responses": { "200": { "description": "Tasks reset" } }
+      }
+    }
+  }
+}
