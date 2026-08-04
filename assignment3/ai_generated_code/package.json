@@ -1,15 +1,14 @@
 {
-  "name": "assignment3",
+  "name": "ai_generated_code",
   "version": "1.0.0",
-  "description": "CRUD api",
-  "keywords": [],
-  "homepage": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/tree/main#readme",
+  "description": "AI-generated SQLite migration, for comparison against the hand-built version",
+  "homepage": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship#readme",
   "bugs": {
     "url": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship.git#main"
+    "url": "git+https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship.git"
   },
   "license": "ISC",
   "author": "Shivam Sagar",
@@ -22,7 +21,9 @@
   "dependencies": {
     "better-sqlite3": "^13.0.2",
     "express": "^5.2.1",
-    "nodemon": "^3.1.14",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
