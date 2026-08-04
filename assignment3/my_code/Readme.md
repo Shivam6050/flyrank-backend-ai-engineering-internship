@@ -47,17 +47,17 @@ Identical to Week 2 — clients cannot tell the storage changed.
 ## Example — curl
 
 ```
-$ curl -i -X POST http://localhost:3000/tasks \
-  -H "Content-Type: application/json" \
-  -d '{"title":"Buy milk"}'
-
+cd "c:\Users\60shi\OneDrive\Desktop\assignments\assignment3\my_code"; Set-Content -Path .\body.json -Value '{"title":"Buy milk"}'; curl.exe -i -X POST http://localhost:3000/tasks -H "Content-Type: application/json" --data-binary "@body.json"; Remove-Item .\body.json -Force
 HTTP/1.1 201 Created
+X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
+Content-Length: 40
+ETag: W/"28-5HZKHl8n6LqowlFw/mkFjTdiFL4"
+Date: Tue, 04 Aug 2026 11:27:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 
-{"id":4,"title":"Buy milk","done":false}
-```
-
-> Replace this block with your own real `curl -i` output before submitting.
+{"id":6,"title":"Buy milk","done":false}
 
 ## Persistence proof
 
