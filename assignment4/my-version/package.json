@@ -8,9 +8,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start:memory": "set STORAGE=memory&& node server.js",
+    "start:memory": "STORAGE=memory node server.js",
     "dev": "nodemon server.js",
-    "dev:memory": "set STORAGE=memory&& nodemon server.js",
+    "dev:memory": "STORAGE=memory nodemon server.js",
     "docker:start": "docker compose up --build",
     "docker:stop": "docker compose down"
   },
