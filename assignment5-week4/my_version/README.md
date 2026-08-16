@@ -51,40 +51,149 @@ protected route contains any token-checking logic of its own.
 
 ## Endpoints
 
-| Method | Path                  | Auth required | Success | Errors   |
-|--------|-----------------------|:--------------:|---------|----------|
-| POST   | `/auth/signup`        | —              | 201     | 400      |
-| POST   | `/auth/login`         | —              | 200     | 400, 401 |
-| POST   | `/auth/logout`        | ✅             | 204     | 401      |
-| GET    | `/public/info`        | —              | 200     | —        |
-| GET    | `/protected/profile`  | ✅             | 200     | 401      |
-| GET    | `/protected/dashboard`| ✅             | 200     | 401      |
+| Method | Path                   | Auth required | Success | Errors   |
+| ------ | ---------------------- | :-----------: | ------- | -------- |
+| POST   | `/auth/signup`         |       —       | 201     | 400      |
+| POST   | `/auth/login`          |       —       | 200     | 400, 401 |
+| POST   | `/auth/logout`         |      ✅       | 204     | 401      |
+| GET    | `/public/info`         |       —       | 200     | —        |
+| GET    | `/protected/profile`   |      ✅       | 200     | 401      |
+| GET    | `/protected/dashboard` |      ✅       | 200     | 401      |
 
 ## Example — curl
 
+Real output, captured against a live Supabase project (port 2000 — this
+project's local dev server was run on that port instead of the 3000
+default; adjust the run command or `.env` if you want them to match).
+Access tokens below are truncated for the README — they're short-lived
+(1 hour) but there's no reason to publish a full working token in a
+public repo either way.
+
+**1. Sign up — 201**
+
 ```
-$ curl -i -X POST http://localhost:3000/auth/signup \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
+$ curl.exe --% -i -X POST http://localhost:2000/auth/signup -H "Content-Type: application/json" -d "{\"email\":\"sagarshivam734@gmail.com\",\"password\":\"password123\"}"
 
 HTTP/1.1 201 Created
+X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
+Content-Length: 1055
 
-{"user":{"id":"...","email":"test@example.com", ...}}
+{"user":{"id":"b7a9c755-a7e4-47c3-b614-e5d19a5f1314","aud":"authenticated","role":"authenticated","email":"sagarshivam734@gmail.com","email_confirmed_at":"2026-08-16T08:39:20.266747635Z", ...}}
 ```
 
+**2. Log in — 200**
+
 ```
-$ curl -i http://localhost:3000/protected/profile \
-  -H "Authorization: Bearer <PASTE_ACCESS_TOKEN_HERE>"
+$ curl.exe --% -i -X POST http://localhost:2000/auth/login -H "Content-Type: application/json" -d "{\"email\":\"sagarshivam734@gmail.com\",\"password\":\"password123\"}"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 2086
+
+{"access_token":"eyJhbGciOiJFUzI1NiIsImtpZCI6ImE4NDkzZjJhLWU2YmYtNDkxOS05ZWQ4LTgzZGY2MDhlOWIxZCIsInR5cCI6IkpXVCJ9...gOB5SeWnCGj1BSGe2VWp22e08IDjjVWaVhCpc5FFDICw","refresh_token":"wiriwvcjcps4","user":{"id":"b7a9c755-a7e4-47c3-b614-e5d19a5f1314","email":"sagarshivam734@gmail.com", ...}}
 ```
 
-> Replace both blocks with your own real output before submitting.
+**3. Public route — 200, no auth**
+
+```
+$ curl.exe -i http://localhost:2000/public/info
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 52
+
+{"message":"Welcome stranger! This info is public."}
+```
+
+**4. Protected route, valid token — 200**
+
+```
+$ curl.exe -i http://localhost:2000/protected/profile -H "Authorization: Bearer eyJhbGciOiJFUzI1NiIs...gOB5SeWnCGj1BSGe2VWp22e08IDjjVWaVhCpc5FFDICw"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 123
+
+{"id":"b7a9c755-a7e4-47c3-b614-e5d19a5f1314","email":"sagarshivam734@gmail.com","created_at":"2026-08-16T08:39:20.254418Z"}
+```
+
+**5. Second protected route, same middleware, same token — 200**
+
+```
+$ curl.exe -i http://localhost:2000/protected/dashboard -H "Authorization: Bearer eyJhbGciOiJFUzI1NiIs...gOB5SeWnCGj1BSGe2VWp22e08IDjjVWaVhCpc5FFDICw"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 96
+
+{"message":"Welcome back, sagarshivam734@gmail.com","id":"b7a9c755-a7e4-47c3-b614-e5d19a5f1314"}
+```
+
+This is the Stage 4 checkpoint proven directly: `/protected/dashboard`
+was never given its own auth logic — it's wired to the exact same
+`verifyToken` middleware as `/protected/profile`, and it correctly
+accepted the same valid token.
+
+**6. Logout — 204**
+
+```
+$ curl.exe -i -X POST http://localhost:2000/auth/logout -H "Authorization: Bearer eyJhbGciOiJFUzI1NiIs...gOB5SeWnCGj1BSGe2VWp22e08IDjjVWaVhCpc5FFDICw"
+
+HTTP/1.1 204 No Content
+X-Powered-By: Express
+```
+
+This confirms the scoped-client fix in the "known limitation" section
+below actually works — a naive `supabase.auth.signOut()` on the shared
+client would also return 204 here without this test being able to tell
+the difference, so this output alone doesn't fully prove it. The real
+proof is Supabase Dashboard → Authentication → Users showing the
+session ended, or a subsequent authenticated call with the same
+(now-revoked) token failing.
+
+**7. Protected route, tampered token — 401**
+
+```
+$ curl.exe --% -i http://localhost:2000/protected/profile -H "Authorization: Bearer eyJhbGciOiJFUzI1NiIs...9y5V9g." (signature deliberately mangled — trailing period added, last character dropped)
+
+HTTP/1.1 401 Unauthorized
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 36
+
+{"error":"Invalid or expired token"}
+```
+
+This is the assignment's specific "forged pass gets rejected" checkpoint
+— same route, same middleware, only the signature broken, and Supabase's
+verification catches it. Both the success and failure paths through
+`verifyToken.js` are now proven with real output, not just claimed.
 
 ## Swagger UI
 
-> Screenshot placeholder — open `/docs`, click **Authorize**, paste an
-> `access_token` from a real `/auth/login` response, and screenshot the
-> unlocked padlocks next to `/auth/logout` and both `/protected/` routes.
+![Swagger UI — GET /protected/profile, authorized, returning 200](./swagger-screenshot.png)
+
+Captured exactly per the steps below: the route's padlock shows the
+endpoint is secured, the executed request carries a real `Authorization:
+Bearer` header (visible in the generated curl command), and the server
+responded `200` with the correct `id`, `email`, and `created_at` — the
+same user from the signup/login calls above.
+
+Steps this followed, for reference:
+
+1. Run `npm start`, then open `http://localhost:3000/docs` (or your
+   actual port) in a browser.
+2. Run `/auth/login` via **Try it out** (or reuse a token from curl
+   above). Copy the `access_token` from the response.
+3. Click the green **Authorize** button near the top right, paste the
+   token, click **Authorize**, then **Close**.
+4. Run **Try it out → Execute** on `/protected/profile`.
+5. Confirm `200` and the padlock — both visible in the screenshot above.
 
 ## A known limitation — logout
 
@@ -93,25 +202,44 @@ holds. The shared server-side client is built once with the anon key and
 never holds a per-caller session, so a naive `supabase.auth.signOut()`
 call here would return 204 while doing nothing. Logout instead builds a
 short-lived client scoped to the caller's exact token before signing out
-— using only the anon key, never `service_role`.
+— using only the anon key, never `service_role`. Verified working (204)
+above, though a 204 alone can't distinguish a real sign-out from a silent
+no-op — see the note under the logout curl output for how to actually
+confirm the session ended.
 
 ## Extras implemented
 
 None yet — see the assignment's optional list (JWT decode note, expiry
 experiment, a 403 case, refresh flow) for what's still available to add.
 
-## Before submitting — what's still needed
+## Before submitting — status
 
 - [x] Real curl output — signup (201), login (200), public/info (200),
       protected/profile (200), protected/dashboard (200), logout (204),
       protected/profile with a tampered token (401)
 - [x] Swagger UI screenshot showing an authorized request and a real
       `200` response ![Swagger screenshot](<Screenshot 2026-08-16 131240-1-1.png>)
-- [x] Staged commits pushed (Stage 0 through Stage 6, one commit each)
-- [x] Stage 7 (optional) — prompt and draft findings written up; run the
-      Stage 3/4 checkpoints against `ai-version/` yourself to confirm the
-      findings before calling this fully done
+- [x] Staged commits pushed — 6 commits, one per stage/deliverable (see
+      below)
+- [x] Stage 7 — prompt and draft findings written up; run the Stage 3/4
+      checkpoints against `ai-version/` yourself to confirm the findings
+      before treating them as fully verified
 
+## Commit history
+
+| Commit                                                                                   | Covers                                                                                     |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `Stage 0: setup Express API server, auth routes, and environment configuration`          | Server bootstrap, `.env` handling, route skeleton                                          |
+| `Stage 5: add package dependencies, OpenAPI specification, and documentation`            | `package.json`, `openapi.json`, initial docs                                               |
+| `Stage 3-4: implement Supabase client helper and reusable token verification middleware` | `lib/supabaseClient.js`, `middleware/verifyToken.js`, applying it to both protected routes |
+| `chore: sync dependencies for Supabase and project utility modules across environments`  | Dependency/lockfile sync                                                                   |
+| `docs: add screenshot for assignment 5 reference`                                        | Swagger UI screenshot                                                                      |
+| `Stage 7: AI vs me prompt, evaluation findings, and submission checklist`                | `ai-version/`, the AI vs me section below, this checklist                                  |
+
+Note: the Stage 5 commit lands before the Stage 3-4 commit in the log
+above. The Swagger/OpenAPI work in that commit was written ahead of the
+middleware it documents, rather than strictly after — worth knowing if
+you're reading the log top to bottom expecting perfect stage order.
 
 ## AI vs me (Stage 7 — bonus)
 
@@ -210,6 +338,3 @@ what "properly modularized" should mean at this size.
 > tighten the prompt — e.g. explicitly requiring a session-scoped client
 > for logout, and defining exactly which headers count as malformed —
 > regenerate, and note here in one sentence what changed.
-
-Confirmed that `supabase.auth.signOut()` in `ai-version/` returned 204 without invalidating the caller's session on Supabase; after tightening the prompt to explicitly require a token-scoped client for sign-out and strict Bearer prefix validation, the regenerated API correctly initialized a session-scoped client for logout and cleanly rejected malformed Authorization headers.
-
