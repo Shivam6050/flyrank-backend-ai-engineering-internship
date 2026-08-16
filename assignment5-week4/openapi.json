@@ -1,0 +1,109 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Auth · Login & Protect API",
+    "version": "1.0.0",
+    "description": "Sign up, log in, and log out via Supabase Auth, with protected routes guarded by a reusable Express middleware. Click Authorize and paste an access_token from /auth/login to test the protected endpoints."
+  },
+  "servers": [{ "url": "http://localhost:${PORT}" }],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Create a new user account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              },
+              "example": { "email": "test@example.com", "password": "password123" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User created" },
+          "400": { "description": "Missing email/password, or Supabase rejected the signup" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Authenticate and receive a JWT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              },
+              "example": { "email": "test@example.com", "password": "password123" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Returns access_token, refresh_token, and the user object" },
+          "400": { "description": "Missing email/password" },
+          "401": { "description": "Invalid login credentials" }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Terminate the current session",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "204": { "description": "Signed out" },
+          "401": { "description": "Missing, malformed, or invalid/expired token" }
+        }
+      }
+    },
+    "/public/info": {
+      "get": {
+        "summary": "Public, unprotected data",
+        "responses": {
+          "200": { "description": "Always returns a welcome message" }
+        }
+      }
+    },
+    "/protected/profile": {
+      "get": {
+        "summary": "Read the authenticated user's own profile",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Returns id, email, created_at" },
+          "401": { "description": "Missing, malformed, or invalid/expired token" }
+        }
+      }
+    },
+    "/protected/dashboard": {
+      "get": {
+        "summary": "Second protected route — proves the middleware is reusable",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Returns a personalized welcome message" },
+          "401": { "description": "Missing, malformed, or invalid/expired token" }
+        }
+      }
+    }
+  }
+}

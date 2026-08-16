@@ -1,0 +1,21 @@
+{
+  "name": "auth-login-protect",
+  "version": "1.0.0",
+  "description": "Secure Auth API (Sign Up / Log In / Log Out + protected routes) using Supabase Auth. FlyRank Internship — Auth, Login & Protect.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.4.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "license": "MIT"
+}
