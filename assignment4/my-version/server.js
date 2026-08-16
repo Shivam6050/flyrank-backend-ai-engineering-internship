@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 const openapiSpec = require("./openapi.json");
-const { createInMemoryTaskRepository } = require("./repositories/inMemoryTaskRepository");
+const { createInMemoryTaskRepository } = require("./repositories/inMemoryTaskrepository");
 const { createPostgresTaskRepository } = require("./repositories/postgresTaskRepository");
 const { createTaskService } = require("./services/taskService");
 const pool = require("./db/pool");

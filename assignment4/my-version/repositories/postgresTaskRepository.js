@@ -9,7 +9,28 @@ const SEED_TASKS = [
 // Stage 1: create the table if missing, seed only if empty — the same
 // first-run rule used for the SQLite version, now against Postgres.
 // Seeding runs inside a transaction so it's all-or-nothing.
+async function waitForDatabase(maxAttempts = 20, delayMs = 1000) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      await pool.query("SELECT 1");
+      return;
+    } catch (err) {
+      lastError = err;
+      if (attempt === maxAttempts) {
+        throw err;
+      }
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+
+  throw lastError;
+}
+
 async function ensureSchema() {
+  await waitForDatabase();
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS tasks (
       id    SERIAL PRIMARY KEY,
