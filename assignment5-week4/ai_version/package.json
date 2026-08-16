@@ -1,0 +1,36 @@
+{
+  "name": "ai_version",
+  "version": "1.0.0",
+  "description": "This is the ai version generated through prompt",
+  "keywords": [
+    "auth",
+    "login",
+    "signup"
+  ],
+  "homepage": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/tree/main#readme",
+  "bugs": {
+    "url": "https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shivam6050/flyrank-backend-ai-engineering-internship.git#main"
+  },
+  "license": "ISC",
+  "author": "Shivam Sagar",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Auth API",
+    "version": "1.0.0",
+    "description": "Secure authentication API using Supabase Auth."
+  },
+  "servers": [{ "url": "http://localhost:3001" }],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Create a new user account",
+        "responses": { "201": { "description": "Created" }, "400": { "description": "Bad Request" } }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Authenticate and receive tokens",
+        "responses": { "200": { "description": "OK" }, "400": { "description": "Bad Request" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "End the current session",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "204": { "description": "No Content" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "summary": "Exchange a refresh token for a new access token",
+        "responses": { "200": { "description": "OK" }, "400": { "description": "Bad Request" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+    "/public/info": {
+      "get": {
+        "summary": "Public data",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/protected/profile": {
+      "get": {
+        "summary": "Get the current user's profile",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+    "/protected/dashboard": {
+      "get": {
+        "summary": "Protected dashboard",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } }
+      }
+    },
+    "/protected/admin": {
+      "get": {
+        "summary": "Admin-only route",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" }, "403": { "description": "Forbidden" } }
+      }
+    }
+  }
+}
