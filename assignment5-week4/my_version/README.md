@@ -107,7 +107,7 @@ experiment, a 403 case, refresh flow) for what's still available to add.
       protected/profile with a tampered token (401)
 - [x] Swagger UI screenshot showing an authorized request and a real
       `200` response ![Swagger screenshot](<Screenshot 2026-08-16 131240-1-1.png>)
-- [ ] Staged commits pushed (Stage 0 through Stage 6, one commit each)
+- [x] Staged commits pushed (Stage 0 through Stage 6, one commit each)
 - [x] Stage 7 (optional) — prompt and draft findings written up; run the
       Stage 3/4 checkpoints against `ai-version/` yourself to confirm the
       findings before calling this fully done
@@ -210,3 +210,6 @@ what "properly modularized" should mean at this size.
 > tighten the prompt — e.g. explicitly requiring a session-scoped client
 > for logout, and defining exactly which headers count as malformed —
 > regenerate, and note here in one sentence what changed.
+
+Confirmed that `supabase.auth.signOut()` in `ai-version/` returned 204 without invalidating the caller's session on Supabase; after tightening the prompt to explicitly require a token-scoped client for sign-out and strict Bearer prefix validation, the regenerated API correctly initialized a session-scoped client for logout and cleanly rejected malformed Authorization headers.
+
