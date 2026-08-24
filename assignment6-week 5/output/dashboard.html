@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polite Scraper Dashboard</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #f8fafc; }
+    h1 { margin-top: 0; color: #38bdf8; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+    .card { background: #1e293b; padding: 20px; border-radius: 8px; border: 1px solid #334155; }
+    .card h3 { margin: 0 0 10px 0; font-size: 14px; color: #94a3b8; text-transform: uppercase; }
+    .card .value { font-size: 28px; font-weight: bold; color: #f8fafc; }
+    .card .sub { font-size: 12px; color: #64748b; margin-top: 5px; }
+    table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155; }
+    th { background: #0f172a; color: #94a3b8; font-size: 13px; }
+    tr:hover { background: #334155; }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Polite Scraper — Observability Dashboard</h1>
+  <div class="grid">
+    <div class="card">
+      <h3>Total Valid Records</h3>
+      <div class="value">60</div>
+      <div class="sub">Target: 60 records</div>
+    </div>
+    <div class="card">
+      <h3>Price Range (GBP)</h3>
+      <div class="value">£12.84 - £57.31</div>
+      <div class="sub">Average: £35.00</div>
+    </div>
+    <div class="card">
+      <h3>Cache Hits</h3>
+      <div class="value">60 / 60</div>
+      <div class="sub">575ms total duration</div>
+    </div>
+    <div class="card">
+      <h3>Failed Pages</h3>
+      <div class="value">0</div>
+      <div class="sub">Failure survival active</div>
+    </div>
+  </div>
+
+  <h2>Extracted Book Inventory</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Availability</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>A Light in the Attic</strong></td>
+        <td>£51.77</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (22 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Tipping the Velvet</strong></td>
+        <td>£53.74</td>
+        <td>★ (One)</td>
+        <td>In stock (20 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/tipping-the-velvet_999/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Soumission</strong></td>
+        <td>£50.10</td>
+        <td>★ (One)</td>
+        <td>In stock (20 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/soumission_998/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Sharp Objects</strong></td>
+        <td>£47.82</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (20 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/sharp-objects_997/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Sapiens: A Brief History of Humankind</strong></td>
+        <td>£54.23</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (20 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/sapiens-a-brief-history-of-humankind_996/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Requiem Red</strong></td>
+        <td>£22.65</td>
+        <td>★ (One)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-requiem-red_995/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Dirty Little Secrets of Getting Your Dream Job</strong></td>
+        <td>£33.34</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-dirty-little-secrets-of-getting-your-dream-job_994/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull</strong></td>
+        <td>£17.93</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-coming-woman-a-novel-based-on-the-life-of-the-infamous-feminist-victoria-woodhull_993/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics</strong></td>
+        <td>£22.60</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-boys-in-the-boat-nine-americans-and-their-epic-quest-for-gold-at-the-1936-berlin-olympics_992/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Black Maria</strong></td>
+        <td>£52.15</td>
+        <td>★ (One)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-black-maria_991/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Starving Hearts (Triangular Trade Trilogy, #1)</strong></td>
+        <td>£13.99</td>
+        <td>★★ (Two)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/starving-hearts-triangular-trade-trilogy-1_990/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Shakespeare's Sonnets</strong></td>
+        <td>£20.66</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/shakespeares-sonnets_989/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Set Me Free</strong></td>
+        <td>£17.46</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/set-me-free_988/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Scott Pilgrim's Precious Little Life (Scott Pilgrim #1)</strong></td>
+        <td>£52.29</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/scott-pilgrims-precious-little-life-scott-pilgrim-1_987/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Rip it Up and Start Again</strong></td>
+        <td>£35.02</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/rip-it-up-and-start-again_986/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Our Band Could Be Your Life: Scenes from the American Indie Underground, 1981-1991</strong></td>
+        <td>£57.25</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/our-band-could-be-your-life-scenes-from-the-american-indie-underground-1981-1991_985/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Olio</strong></td>
+        <td>£23.88</td>
+        <td>★ (One)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/olio_984/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Mesaerion: The Best Science Fiction Stories 1800-1849</strong></td>
+        <td>£37.59</td>
+        <td>★ (One)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Libertarianism for Beginners</strong></td>
+        <td>£51.33</td>
+        <td>★★ (Two)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/libertarianism-for-beginners_982/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>It's Only the Himalayas</strong></td>
+        <td>£45.17</td>
+        <td>★★ (Two)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/its-only-the-himalayas_981/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>In Her Wake</strong></td>
+        <td>£12.84</td>
+        <td>★ (One)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/in-her-wake_980/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>How Music Works</strong></td>
+        <td>£37.32</td>
+        <td>★★ (Two)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/how-music-works_979/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Foolproof Preserving: A Guide to Small Batch Jams, Jellies, Pickles, Condiments, and More: A Foolproof Guide to Making Small Batch Jams, Jellies, Pickles, Condiments, and More</strong></td>
+        <td>£30.52</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/foolproof-preserving-a-guide-to-small-batch-jams-jellies-pickles-condiments-and-more-a-foolproof-guide-to-making-small-batch-jams-jellies-pickles-condiments-and-more_978/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Chase Me (Paris Nights #2)</strong></td>
+        <td>£25.27</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/chase-me-paris-nights-2_977/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Black Dust</strong></td>
+        <td>£34.53</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/black-dust_976/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Birdsong: A Story in Pictures</strong></td>
+        <td>£54.64</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/birdsong-a-story-in-pictures_975/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>America's Cradle of Quarterbacks: Western Pennsylvania's Football Factory from Johnny Unitas to Joe Montana</strong></td>
+        <td>£22.50</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/americas-cradle-of-quarterbacks-western-pennsylvanias-football-factory-from-johnny-unitas-to-joe-montana_974/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Aladdin and His Wonderful Lamp</strong></td>
+        <td>£53.13</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (19 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/aladdin-and-his-wonderful-lamp_973/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Worlds Elsewhere: Journeys Around Shakespeare’s Globe</strong></td>
+        <td>£40.30</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/worlds-elsewhere-journeys-around-shakespeares-globe_972/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Wall and Piece</strong></td>
+        <td>£44.18</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/wall-and-piece_971/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Four Agreements: A Practical Guide to Personal Freedom</strong></td>
+        <td>£17.66</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-four-agreements-a-practical-guide-to-personal-freedom_970/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Five Love Languages: How to Express Heartfelt Commitment to Your Mate</strong></td>
+        <td>£31.05</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-five-love-languages-how-to-express-heartfelt-commitment-to-your-mate_969/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Elephant Tree</strong></td>
+        <td>£23.82</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-elephant-tree_968/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Bear and the Piano</strong></td>
+        <td>£36.89</td>
+        <td>★ (One)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-bear-and-the-piano_967/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Sophie's World</strong></td>
+        <td>£15.94</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/sophies-world_966/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Penny Maybe</strong></td>
+        <td>£33.29</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/penny-maybe_965/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Maude (1883-1993):She Grew Up with the country</strong></td>
+        <td>£18.02</td>
+        <td>★★ (Two)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/maude-1883-1993she-grew-up-with-the-country_964/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>In a Dark, Dark Wood</strong></td>
+        <td>£19.63</td>
+        <td>★ (One)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/in-a-dark-dark-wood_963/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Behind Closed Doors</strong></td>
+        <td>£52.22</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (18 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/behind-closed-doors_962/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>You can't bury them all: Poems</strong></td>
+        <td>£33.63</td>
+        <td>★★ (Two)</td>
+        <td>In stock (17 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/you-cant-bury-them-all-poems_961/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Slow States of Collapse: Poems</strong></td>
+        <td>£57.31</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (17 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/slow-states-of-collapse-poems_960/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Reasons to Stay Alive</strong></td>
+        <td>£26.41</td>
+        <td>★★ (Two)</td>
+        <td>In stock (17 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/reasons-to-stay-alive_959/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Private Paris (Private #10)</strong></td>
+        <td>£47.61</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (17 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/private-paris-private-10_958/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>#HigherSelfie: Wake Up Your Life. Free Your Soul. Find Your Tribe.</strong></td>
+        <td>£23.11</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (17 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/higherselfie-wake-up-your-life-free-your-soul-find-your-tribe_957/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Without Borders (Wanderlove #1)</strong></td>
+        <td>£45.07</td>
+        <td>★★ (Two)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/without-borders-wanderlove-1_956/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>When We Collided</strong></td>
+        <td>£31.77</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/when-we-collided_955/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>We Love You, Charlie Freeman</strong></td>
+        <td>£50.27</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/we-love-you-charlie-freeman_954/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Untitled Collection: Sabbath Poems 2014</strong></td>
+        <td>£14.27</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/untitled-collection-sabbath-poems-2014_953/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Unseen City: The Majesty of Pigeons, the Discreet Charm of Snails &amp; Other Wonders of the Urban Wilderness</strong></td>
+        <td>£44.18</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/unseen-city-the-majesty-of-pigeons-the-discreet-charm-of-snails-other-wonders-of-the-urban-wilderness_952/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Unicorn Tracks</strong></td>
+        <td>£18.78</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/unicorn-tracks_951/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Unbound: How Eight Technologies Made Us Human, Transformed Society, and Brought Our World to the Brink</strong></td>
+        <td>£25.52</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/unbound-how-eight-technologies-made-us-human-transformed-society-and-brought-our-world-to-the-brink_950/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Tsubasa: WoRLD CHRoNiCLE 2 (Tsubasa WoRLD CHRoNiCLE #2)</strong></td>
+        <td>£16.28</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/tsubasa-world-chronicle-2-tsubasa-world-chronicle-2_949/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Throwing Rocks at the Google Bus: How Growth Became the Enemy of Prosperity</strong></td>
+        <td>£31.12</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/throwing-rocks-at-the-google-bus-how-growth-became-the-enemy-of-prosperity_948/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>This One Summer</strong></td>
+        <td>£19.49</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/this-one-summer_947/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>Thirst</strong></td>
+        <td>£17.27</td>
+        <td>★★★★★ (Five)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/thirst_946/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Torch Is Passed: A Harding Family Story</strong></td>
+        <td>£19.09</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-torch-is-passed-a-harding-family-story_945/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Secret of Dreadwillow Carse</strong></td>
+        <td>£56.13</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-secret-of-dreadwillow-carse_944/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Pioneer Woman Cooks: Dinnertime: Comfort Classics, Freezer Food, 16-Minute Meals, and Other Delicious Ways to Solve Supper!</strong></td>
+        <td>£56.41</td>
+        <td>★ (One)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-pioneer-woman-cooks-dinnertime-comfort-classics-freezer-food-16-minute-meals-and-other-delicious-ways-to-solve-supper_943/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Past Never Ends</strong></td>
+        <td>£56.50</td>
+        <td>★★★★ (Four)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-past-never-ends_942/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+
+      <tr>
+        <td><strong>The Natural History of Us (The Fine Art of Pretending #2)</strong></td>
+        <td>£45.22</td>
+        <td>★★★ (Three)</td>
+        <td>In stock (16 available)</td>
+        <td><a href="https://books.toscrape.com/catalogue/the-natural-history-of-us-the-fine-art-of-pretending-2_941/index.html" target="_blank">View Book</a></td>
+      </tr>
+    
+    </tbody>
+  </table>
+</body>
+</html>
